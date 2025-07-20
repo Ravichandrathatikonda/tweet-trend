@@ -1,12 +1,20 @@
 pipeline {
     agent {
-        label 'maven'
+        node {
+            label 'maven'
+        }       
     }
 
+environment {
+    PATH = "/opt/apache-maven-3.9.10/bin:$PATH"
+}
+
+# We have removed checkout stage as Jenkins is by default capturing that stage while running the job
+
     stages {
-        stage('clone-code') {
+        stage('build') {
             steps {
-                git branch: 'main', url: 'https://github.com/Ravichandrathatikonda/tweet-trend.git'
+                sh 'mvn clean deploy'
             }
         }
     }
