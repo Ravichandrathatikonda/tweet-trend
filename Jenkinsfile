@@ -9,7 +9,7 @@ environment {
     PATH = "/opt/apache-maven-3.9.10/bin:$PATH"
 }
 
-# We have removed checkout stage as Jenkins is by default capturing that stage while running the job
+//We have removed checkout stage as Jenkins is by default capturing that stage while running the job
 
     stages {
         stage('build') {
