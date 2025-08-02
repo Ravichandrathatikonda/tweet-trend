@@ -17,6 +17,13 @@ environment {
                 sh 'mvn clean deploy -DskipTests=true'
             }
         }
+        stage('test') {
+            steps {
+                echo "-----unit tests started------"
+                sh 'mvn surefire-report:report'
+                echo "------unit tests completed----"
+            }
+        }
         stage('SonarQube analysis') {
             environment {
                 scannerHome = tool 'valaxy-sonar-scanner'
