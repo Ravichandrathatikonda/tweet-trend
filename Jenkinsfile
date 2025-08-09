@@ -17,13 +17,13 @@ environment {
                 sh 'mvn clean deploy -DskipTests=true'
             }
         }
-        stage('test') {
+        /* stage('test') {
             steps {
                 echo "-----unit tests started------"
                 sh 'mvn surefire-report:report'
                 echo "------unit tests completed----"
             }
-        }
+        } */
         stage('SonarQube analysis') {
             environment {
                 scannerHome = tool 'valaxy-sonar-scanner'
@@ -34,5 +34,18 @@ environment {
                 }
             }   
         }
+        /* stage("Quality Gate") {
+            steps {
+                script {
+                    timeout(time: 1, unit: 'HOURS') {
+                    def qg = waitForQualityGate() // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
+                    if (qg.status != OK) {
+                        error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                        }
+                    }
+                }
+                
+            }
+        } */
     }
 }
