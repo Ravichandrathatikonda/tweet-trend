@@ -34,6 +34,8 @@ environment {
                 }
             }   
         }
+
+        //commented this section as sonarqube is not allowing to select new quality gate and asking for subscription
         /* stage("Quality Gate") {
             steps {
                 script {
